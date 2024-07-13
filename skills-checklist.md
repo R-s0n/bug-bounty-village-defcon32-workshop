@@ -1,1 +1,8 @@
 # Skills Checklist
+
+- OFFENSIVE
+    - 
+
+
+- DEFENSIVE
+    - 

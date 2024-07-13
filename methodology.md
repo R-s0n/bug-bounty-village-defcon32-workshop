@@ -1,1 +1,0 @@
-# My Full Bug Bounty Hunting Methodology
