@@ -1,4 +1,5 @@
 # My Full Bug Bounty Hunting Methodology - Injection
+
 *GOAL: Unexpected User-Controlled Input Causes The Application To Act In An Unexpected Way*
 - Targets Flaws in the Application's **Code**
 - How It Works (Example):
