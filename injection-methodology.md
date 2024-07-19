@@ -25,7 +25,9 @@
     - Client-Side Prototype Pollution
     - PostMessage Vulnerabilities
 - Injecting CSS
-    - 
+    - Find Reflected User-Controlled Input in CSS
+    - Escalate to Inject CSS
+    - Escalate to Inject External Resources Loaders
 - Weaponizing HTML-Based Client-Side Injections:
     - Compensating Controls:
         - **Client-Side Validation** (*PREVENTS ATTACK*) - No effect on security but can show you what the developers are concered about.
