@@ -27,17 +27,17 @@
 - Injecting CSS
     - 
 - Weaponizing HTML-Based Client-Side Injections:
-        - Compensating Controls:
-            - **Client-Side Validation** (*PREVENTS ATTACK*) - No effect on security but can show you what the developers are concered about.
-            - **Server-Side Validation** (*PREVENTS ATTACK*) - Ensure user-controlled input is the expected *type* and *size* you expect, sanitize for malicious characters.
-            - **Web Application Firewall (WAF)** (*PREVENTS ATTACK*) - Blocks HTTP requests based on a ruleset, identifies malicious code patterns.
-            - **Output Encoding** (*PREVENTS ATTACK*) - Encodes user-controlled input as it is output to the DOM, preventing malicious code from executing
-            - **Cookie Flags** (*MITIGATES IMPACT*) - Directives that tell the browser how a cookie can be handled and where it can be sent.
-            - **Content Security Policy (CSP)** (*MITIGATES IMPACT*) - Directives that tell the browser where and how recourses can be loaded, scripts can execute, connections can be established, and much more.
-        - Showing Impact:
-            - Steal victim's cookie
-            - Force victim to make an HTTP request
-            - Steal DOM of restricted pages
+    - Compensating Controls:
+        - **Client-Side Validation** (*PREVENTS ATTACK*) - No effect on security but can show you what the developers are concered about.
+        - **Server-Side Validation** (*PREVENTS ATTACK*) - Ensure user-controlled input is the expected *type* and *size* you expect, sanitize for malicious characters.
+        - **Web Application Firewall (WAF)** (*PREVENTS ATTACK*) - Blocks HTTP requests based on a ruleset, identifies malicious code patterns.
+        - **Output Encoding** (*PREVENTS ATTACK*) - Encodes user-controlled input as it is output to the DOM, preventing malicious code from executing
+        - **Cookie Flags** (*MITIGATES IMPACT*) - Directives that tell the browser how a cookie can be handled and where it can be sent.
+        - **Content Security Policy (CSP)** (*MITIGATES IMPACT*) - Directives that tell the browser where and how recourses can be loaded, scripts can execute, connections can be established, and much more.
+    - Showing Impact:
+        - Steal victim's cookie
+        - Force victim to make an HTTP request
+        - Steal DOM of restricted pages
 - **Output**:
     - Application Behaves Unexpectedly
     - That Behavior Has a Negative Impact on Sensitive Customer Data
