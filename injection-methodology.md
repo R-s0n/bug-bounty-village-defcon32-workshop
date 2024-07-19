@@ -82,10 +82,12 @@
             - Python:
             - Java:
         - Server-Side Template Injection (SSTI)
-            - 
+            - Node: 
+            - PHP: 
+            - Python:
+            - Java:
         - Server-Side Prototype Pollution (SSPP)
             - Node:
-        
 - **Output**:
     - Application Behaves Unexpectedly
     - That Behavior Has a Negative Impact on Sensitive Customer Data
