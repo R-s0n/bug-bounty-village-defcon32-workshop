@@ -10,7 +10,7 @@
 - Identify Cloud resources belonging to your target
     - Multi Cloud OSINT Search - [Cloud_Enum](https://github.com/initstring/cloud_enum) 
     - Resource identification by DNS records
-        - [Fire_cloud standalone]() tool that reviews DNS records of subdomains for AWS resources
+        - [Fire_cloud standalone](https://github.com/bblastie/fire_cloud) tool that reviews DNS records of subdomains for AWS resources
             - Can be adapted to other cloud providers very easily
         - Note that other cloud resources could be searched for and that some times these resources are hidden behind subdomains that are pointing them via CNAME registry.
             - Look for CNAME's pointing to `['amazonaws.com', 'digitaloceanspaces.com', 'windows.net', 'storage.googleapis.com', 'aliyuncs.com']`
