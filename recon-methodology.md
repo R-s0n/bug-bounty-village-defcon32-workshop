@@ -40,17 +40,27 @@
 **Input**: *Apex Domain*
 
 - Apex Domain -> List of Subdomains
-    - Amass
-    - Web Scraping
-    - Brute Force
-    - Link Discovery
-    - Cloud IP Ranges
-    - Marketing & Favicon
+    - [Amass](https://github.com/owasp-amass/amass) - Amass (by OWASP) is the backbone of my recon methodology at this stage.  It does many of the steps below in one tool, as well as DNS and ASN discovery.  Amass typically finds 80% of the total subdomains I discover, but keep in mind that everyone else can easily use Amass as well.  When it comes to recon, the bugs are at the far ends of the bell curve.
+    - [Web Scraping](https://www.imperva.com/learn/application-security/web-scraping-attack/#:~:text=Web%20scraping%20is%20the%20process,data%20stored%20in%20a%20database.) - Your goal here is to discover as many subdomains as you can using public resources on the web.  Resources can range from public search engines like Google to APIs that maintain certificate registration data.  Always try to be creative and find new ways to scrape public web sources for sudomains.  If you can come up with a technique that no one has thought of, you might find subdomains no one else has tested.
+        - [Sublist3r](https://github.com/huntergregal/Sublist3r)
+        - [Assetfinder](https://github.com/tomnomnom/assetfinder)
+        - [GetAllUrls(GAU)](https://github.com/lc/gau)
+        - [Certificate Transparency Logs (CRT)](https://github.com/google/certificate-transparency)
+        - [Subfinder](https://github.com/projectdiscovery/subfinder)
+    - [Brute Force](https://blog.projectdiscovery.io/recon-series-2/#:~:text=Subdomain%20brute%20forcing%20involves%20using,determine%20which%20subdomains%20are%20valid.) - Brute forcing for subdomains is fairly simple and exactly what it sounds like.  Simply take a wordlist of possible subdomains and attempt to resolve the full domain with each subdomain in the wordlist.
+        - [ShuffleDNS](https://github.com/projectdiscovery/shuffledns)
+        - [CeWL](https://github.com/digininja/CeWL) + ShuffleDNS - CeWL crawls a website and builds a wordlist dynamically based on the most commonly used words in the target app.  Using CeWL to build a word list, then passing that list to ShuffleDNS, can be a great way to find subdomains that follow a naming convention that might show up in the DOM.
+    - Link Discovery - At this point, you will have a list of subdomains that *could* point to live web application.  For the next stage of recon, you will use tools to crawl the subdomains that point to live web applications.  To do that, you first need to consolidate your list of subdomains and identify which of the FQDNs points to a live web app.  There's more information on how to do that in the list below, but remember that you need do this twice:  Once before Link Discovery, and once at the end after all other tools have completed.
+        - [GoSpider](https://github.com/jaeles-project/gospider)
+        - [Subdomainizer](https://github.com/nsonaniya2010/SubDomainizer)
+    - [Cloud IP Ranges](https://www.daehee.com/blog/scan-aws-ip-ssl-certificates) - I've built an automated tool called [Clear-Sky](https://github.com/R-s0n/Clear-Sky) to do this.  Keep in mind that loading the certificate data can take over 24 hours, depending on your Internet speed.
+    - [Marketing & Favicon](https://book.hacktricks.xyz/generic-methodologies-and-resources/external-recon-methodology#trackers)
 - List of Subdomains -> List of Live URLs
-    - Resolve Subdomains to IPs
-    - Port Scanning
-    - Consolidate
-    - Test for Live Web App
+    - Resolve Subdomains to IPs - Now that you have a list of subdomains, you can resolve each of them to identify the IP Address of possible targets.  Keep in mind that this is *very* prone to false positives, so you need to manually verify each of the IP Addresses before you start testing.  If the target's infrastructure is on-premises, make sure the IP is included in the [CIDR Ranges](https://blog.ip2location.com/knowledge-base/what-is-cidr/) of the ASNs.  If their infrastrucutre is in the cloud, it's very possible that their IPs are not static.  Manually verify by accessing the IP address directly through the browser (Example: https://192.168.1.1).  By accessing the application by the IP directly, you may be able to bypass security controls or cause it to act differently than it would if you had accessed it throught he domain.  This also changes the [Host Header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Host), and may allow you to access a new application altogether.  
+    - Port Scanning - Once you've got a valid list of IP Addresses that are confirmed to belong to the target, you can run a port scan to see what other services might be available to an attacker.  Ideally, you can find a web application running on a different port, such as 8080 or 8443.  
+        - [DNMasscan](https://github.com/rastating/dnmasscan) - This tool resolves the IP Address and does port scanning.  Just remember to verify the results before testing.
+    - Consolidate - As I mentioned before, you'll need to write an algorithm that consolidates the subdomains into a list of unique subdomains.  You should also verify that all the subdomains belong to the original Apex Domain.  Many of these tools, especially the crawlers, will return domains that are not "in scope".
+    - Test for Live Web App - Finally, you can test your list of unique subdomains/IP addresses/ports to find which of those are pointing to a live web application.  The two tools I use to do this are [httprobe](https://github.com/tomnomnom/httprobe) and [httpx](https://github.com/projectdiscovery/httpx).
 
 **Output**: *List of URLs Pointing to Live Web Applications*
 
@@ -101,7 +111,8 @@
 - 
 
 **Output**: *Data Valuable to an Attacker*
-    - How Does This Data Effect Customer Data:
+
+How Does This Data Effect Customer Data:
 
 ## Leaked Secrets (Web Scraping)
 
@@ -110,7 +121,8 @@
 - 
 
 **Output**: *Data Valuable to an Attacker*
-    - How Does This Data Effect Customer Data:
+
+How Does This Data Effect Customer Data:
 
 ## Leaked Secrets (GitHub)
 
@@ -119,7 +131,8 @@
 - 
 
 **Output**: *Data Valuable to an Attacker*
-    - How Does This Data Effect Customer Data:
+
+How Does This Data Effect Customer Data:
 
 ## CVE Spraying
 
@@ -128,4 +141,5 @@
 - 
 
 **Output**: *Valid CVE Found on Target's Attack Surface*
-    - How Does This CVE Effect Customer Data:
+
+How Does This CVE Effect Customer Data:

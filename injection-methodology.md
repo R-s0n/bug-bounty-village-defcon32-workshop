@@ -67,25 +67,25 @@
         - Backslash Powered Scanner
     - Vulnerability Examples by Language
         - Command Injection
-            - Node: 
-            - PHP: 
-            - Python:
-            - Java:
-        - Code Injection
-            - Node: 
-            - PHP: 
-            - Python:
-            - Java:
+            - Node: `child_process.execSync()`
+            - PHP: `exec()` OR `system()`
+            - Python: `subprocess.run()`
+            - Java: `Runtime.getRuntime().exec()`
+        - Code Injection - *Eval is Evil*
+            - Node: `eval()`
+            - PHP: `eval()`
+            - Python: `eval()`
+            - Java: `ScriptEngineManager manager = new ScriptEngineManager(); ScriptEngine engine = manager.getEngineByName("js");  Object result = engine.eval();`
         - Server-Side Request Forgery (SSRF)
-            - Node: 
-            - PHP: 
-            - Python:
-            - Java:
+            - Node: `http.request()` OR `axios.get()` OR `const fetch = require('node-fetch'); fetch()`
+            - PHP: [cURL Extension](https://www.php.net/manual/en/book.curl.php)
+            - Python: `requests.get()`
+            - Java: `URL url = new URL(USER_CONTROLLED_INPUT); HttpURLConnection con = (HttpURLConnection) url.openConnection(); con.setRequestMethod("GET");`
         - Server-Side Template Injection (SSTI)
-            - Node: 
-            - PHP: 
-            - Python:
-            - Java:
+            - [Node](https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection#jade-nodejs): `var html = jade.render('USER_CONTROLLED_INPUT', merge(options, locals));`
+            - [PHP](https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection#twig-php): `$output = $twig > render (USER_CONTROLLED_INPUT)`
+            - [Python](https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection#jinja2-python): `template.render(USER_CONTROLLED_INPUT)`
+            - [Java](https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection#spring-framework-java): [Code Examples](https://www.baeldung.com/spring-template-engines)
         - Server-Side Prototype Pollution (SSPP)
             - Node:
 - **Output**:
