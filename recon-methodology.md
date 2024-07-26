@@ -55,6 +55,7 @@
         - [GoSpider](https://github.com/jaeles-project/gospider)
         - [Subdomainizer](https://github.com/nsonaniya2010/SubDomainizer)
     - [Cloud IP Ranges](https://www.daehee.com/blog/scan-aws-ip-ssl-certificates) - I've built an automated tool called [Clear-Sky](https://github.com/R-s0n/Clear-Sky) to do this.  Keep in mind that loading the certificate data can take over 24 hours, depending on your Internet speed.
+    - [AppScan](https://github.com/osm6495/appscan) - AppScan allows you to enumerate subdomains and check the responses you get from sending different HTTP verbs. It's also designed to be simple to plug into scripts and automated tools.
 - List of Subdomains -> List of Live URLs
     - Resolve Subdomains to IPs - Now that you have a list of subdomains, you can resolve each of them to identify the IP Address of possible targets.  Keep in mind that this is *very* prone to false positives, so you need to manually verify each of the IP Addresses before you start testing.  If the target's infrastructure is on-premises, make sure the IP is included in the [CIDR Ranges](https://blog.ip2location.com/knowledge-base/what-is-cidr/) of the ASNs.  If their infrastrucutre is in the cloud, it's very possible that their IPs are not static.  Manually verify by accessing the IP address directly through the browser (Example: https://192.168.1.1).  By accessing the application by the IP directly, you may be able to bypass security controls or cause it to act differently than it would if you had accessed it throught he domain.  This also changes the [Host Header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Host), and may allow you to access a new application altogether.  
     - Port Scanning - Once you've got a valid list of IP Addresses that are confirmed to belong to the target, you can run a port scan to see what other services might be available to an attacker.  Ideally, you can find a web application running on a different port, such as 8080 or 8443.  
@@ -116,7 +117,9 @@
 
 **Input**: *URL Pointing to Live Web Application Worth Your Time (Target URL)*
 
-- 
+- Crawling Target URLs for Secrets:
+  - [Cariddi](https://github.com/edoardottt/cariddi)
+  - [Webstrings](https://github.com/osm6495/rust-webstrings)
 
 **Output**: *Data Valuable to an Attacker*
 
