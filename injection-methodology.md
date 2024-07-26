@@ -63,7 +63,7 @@
     - Fuzzing The Target
         - Send an unexpected type (Ex: App expects a `String`, send `null` or an `int`)
         - Send a large payload (Ex: 10,000 of the letter `A`)
-        - Send unexpected characters (Ex: All possible ASCII characters in Unicode, Hex, and Double Hex)
+        - [Send unexpected characters](https://github.com/0xacb/recollapse) (Ex: All possible ASCII characters in Unicode, Hex, and Double Hex)
         - Backslash Powered Scanner
     - Vulnerability Examples by Language
         - Command Injection
@@ -86,7 +86,7 @@
             - [PHP](https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection#twig-php): `$output = $twig > render (USER_CONTROLLED_INPUT)`
             - [Python](https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection#jinja2-python): `template.render(USER_CONTROLLED_INPUT)`
             - [Java](https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection#spring-framework-java): [Code Examples](https://www.baeldung.com/spring-template-engines)
-        - Server-Side Prototype Pollution (SSPP)
+        - [Server-Side Prototype Pollution (SSPP)](https://labs.withsecure.com/publications/prototype-pollution-primer-for-pentesters-and-programmers)
             - Node:
 - **Output**:
     - Application Behaves Unexpectedly
