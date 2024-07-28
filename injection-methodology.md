@@ -88,6 +88,9 @@
             - [Java](https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection#spring-framework-java): [Code Examples](https://www.baeldung.com/spring-template-engines)
         - Server-Side Prototype Pollution (SSPP)
             - Node:
+        - Insecure Deserialization
+        - File Inclusion
+        - XML External Entity (XXE)
 - **Output**:
     - Application Behaves Unexpectedly
     - That Behavior Has a Negative Impact on Sensitive Customer Data
@@ -97,7 +100,12 @@
 ## Database Injections
 - *GOAL: Attacker's user-controlled input forces the application to make a database query the developers did not intend*
 - **Input**: Single Attack Vector w/ Possible Injection
-- 
+- SQL Injection
+    - MySQL
+    - MSSQL
+    - PostGRES
+    - 
+- NoSQL Injection
 - **Output**:
     - Application Behaves Unexpectedly
     - That Behavior Has a Negative Impact on Sensitive Customer Data

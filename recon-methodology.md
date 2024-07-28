@@ -126,10 +126,10 @@
         - Client-Side Data Storage - Developers have the option of storing data in the client's browser through mechanisms like `localStorage` and `sessionStorage`.  While these can be a great option for [improving an application's performance](https://medium.com/@MakeComputerScienceGreatAgain/leveraging-the-power-of-localstorage-a-guide-to-efficient-client-side-data-management-d20095733e16) or building new functionality quickly in a [Single-Page Application (SPA)](https://developer.mozilla.org/en-US/docs/Glossary/SPA), there are significant security risks to using these storage options for sensitive data.  If you find an application that has a large amount of data in either `localStorage` or `sessionStorage`, especially any sensitive data, that's a great sign that this application is worth your time.
         - [Cookies & Cookie Flags](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies) - Next, you will want to look through the cookies stored in the browser after you have logged in.  *Keep in mind that applications without authentication are not good targets for logic testing because you will be kept away from most of the mechanisms you will need to test.*  Once you've logged in, look through the cookies and identify any that are used to [establish a session](https://securiti.ai/blog/session-cookies/).  For each cookie that is used to establishe a session, check for the following:
             - Data Stored in Cookie - Some cookies contain data that can be read in plain text, often after a bit of decoding.  Cookies that contain data are most commonly encoded using [Base64](https://en.wikipedia.org/wiki/Base64).  The most well-known example of this is a [JSON Web Token (JWT)](https://jwt.io/introduction).
-            - Cookie Signed for Integrity - If you find a cookie that contains data, check to see if that cookie has been [signed for integrity](https://eitca.org/cybersecurity/eitc-is-wasf-web-applications-security-fundamentals/session-attacks/cookie-and-session-attacks/examination-review-cookie-and-session-attacks/what-is-the-purpose-of-signing-cookies-and-how-does-it-prevent-exploitation/)
-            - Secure Cookie Flag
-            - httpOnly Cookie Flag
-            - sameSite Cookie Flag
+            - Cookie Signed for Integrity - If you find a cookie that contains data, check to see if that cookie has been [signed for integrity](https://eitca.org/cybersecurity/eitc-is-wasf-web-applications-security-fundamentals/session-attacks/cookie-and-session-attacks/examination-review-cookie-and-session-attacks/what-is-the-purpose-of-signing-cookies-and-how-does-it-prevent-exploitation/).  If not, the data in the cookie is a *great* target for injection & logic attacks.  If so, be sure to check that it's being validated **at every endpoint**, not just at one point in the application.  Don't assume the developers are running every HTTP request through a single point to verify the signature, that's best practice but in reality there will always be edge cases.
+            - [Secure Cookie Flag](https://owasp.org/www-community/controls/SecureCookieAttribute) - The secure cookie flag prevents the cookie from being sent through unencrypted HTTP traffic.  Lack of a secure flag on a session token may make it easier to leak a victim's valid cookie.
+            - [httpOnly Cookie Flag](https://owasp.org/www-community/HttpOnly) - The httpOnly flag prevents client-side JavaScript from accessing the cookie.  Session cookies without this flag can be easily stolen through client-side injection attacks like Cross-Site Scripting (XSS).
+            - [sameSite Cookie Flag](https://owasp.org/www-community/SameSite) - The sameSite cookie flag helps prevent [Cross-Site Request Forgery (CSRF)](https://owasp.org/www-community/attacks/csrf) attacks.  This cookie can be set using three options: `strict`, `lax`, or `none`.  If the target application's session token is set to `none`, than CSRF attacks may be possible.
         - Client-Side JavaScript
         - State/Props 
     - Mechanisms
@@ -150,7 +150,7 @@
 
 **Output**: *Data Valuable to an Attacker*
 
-How Does This Data Effect Customer Data:
+
 
 ## Leaked Secrets (Web Scraping)
 
@@ -160,7 +160,7 @@ How Does This Data Effect Customer Data:
 
 **Output**: *Data Valuable to an Attacker*
 
-How Does This Data Effect Customer Data:
+
 
 ## Leaked Secrets (GitHub)
 
@@ -170,7 +170,7 @@ How Does This Data Effect Customer Data:
 
 **Output**: *Data Valuable to an Attacker*
 
-How Does This Data Effect Customer Data:
+
 
 ## CVE Spraying
 
@@ -180,4 +180,3 @@ How Does This Data Effect Customer Data:
 
 **Output**: *Valid CVE Found on Target's Attack Surface*
 
-How Does This CVE Effect Customer Data:
