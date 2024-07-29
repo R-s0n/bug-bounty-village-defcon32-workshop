@@ -130,10 +130,38 @@
             - [Secure Cookie Flag](https://owasp.org/www-community/controls/SecureCookieAttribute) - The secure cookie flag prevents the cookie from being sent through unencrypted HTTP traffic.  Lack of a secure flag on a session token may make it easier to leak a victim's valid cookie.
             - [httpOnly Cookie Flag](https://owasp.org/www-community/HttpOnly) - The httpOnly flag prevents client-side JavaScript from accessing the cookie.  Session cookies without this flag can be easily stolen through client-side injection attacks like Cross-Site Scripting (XSS).
             - [sameSite Cookie Flag](https://owasp.org/www-community/SameSite) - The sameSite cookie flag helps prevent [Cross-Site Request Forgery (CSRF)](https://owasp.org/www-community/attacks/csrf) attacks.  This cookie can be set using three options: `strict`, `lax`, or `none`.  If the target application's session token is set to `none`, than CSRF attacks may be possible.
-        - Client-Side JavaScript
-        - State/Props 
-    - Mechanisms
-    - Roles
+        - Client-Side JavaScript - You can learn a lot about a target application and the developers that built it by how the client-side JavaScript is developed/maintained.  This code can contain a wealth of information about the application, especially for Single Page Applications (SPAs).  
+            - Check for the following:
+                - Webpack Serialized/Obfuscated?
+                - Client-Side JavaScript Readable?
+                - Custom Client-Side JavaScript Files?
+                - Secrets/API Keys Stored in JavaScript?
+                - Find API Endpoints in Client-Side JavaScript?
+            - Secure State:
+                - Webpack is serialized and obfuscated properly so you cannot download the raw React (or other framework) code
+                - Client-side JavaScript is [Minified](https://kinsta.com/blog/minify-javascript/) so it cannot be easily read
+                - No custom JavaScript files on the client-side, only updated NPM libraries that have been thoroughly tested
+                - No API keys or other secrets are stored in plain test in the client-side JavaScript
+                - All API endpoints identified in the client-side JavaScript are easily found through typical navigation
+            - Insecure State:
+                - Webpack is not serialized/obfuscated, can be downloaded using a tool like [JS Miner](https://portswigger.net/bappstore/0ab7a94d8e11449daaf0fb387431225b)
+                - Client-side JavaScript is easily readable by a human without any additional steps
+                - Custom JavaScript files are used, meaning they have not been thoroughly tested like an NPM package would be
+                - API keys or other secrets are found stored in the client-side JavaScript, ven if they are not sensitive secrets or keys, this still shows a failure to follow best practices and could point to bigger issues
+                - Hunters can identify hidden API endpoints in the client-side JavaScript code to expand their attack surface
+        - State/Props - Finally, if the application is using React on the front-end, use a browser extension like [React Developer Tools](https://react.dev/learn/react-developer-tools) to view data stored in the framework's [Virtual DOM](https://legacy.reactjs.org/docs/faq-internals.html).  Developers often forget that these values can easily be read by the client and will store data that can help a bug bounty hunter learn more about how the server-side works, or possibly even exfiltrate sensitive data.
+    - Mechanisms - A mechanism in a web application is a series of HTTP requests that performs various [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations that accomplish a specific task.  When looking for logic vulnerability attack vectors, look for mechanisms in the application that meet the following criteria:
+        - Complex - The more HTTP Requests, parameters, etc. that are required to make up a larger mechanism, the greater chance that something can go wrong.  
+        - Sensitive - As a bug bounty researcher, it's not enough to simply find a vulnerability in a web application.  You need to also demonstrate the *impact* of that vulnerability.  To show impact, you almost always need to show how your finding can have a negative impact on the application's *customer data*.  So, for each mechanism you identify as an attack vector, be sure you can clearly explain how you can weaponize that mechanism to negatively impact customer data.
+        - Examples to Get You Started:
+            - Password Reset Mechanism
+            - SSO/OAuth Authentication Mechanism
+            - File Upload Mechanism
+            - Online Shopping Checkout/Payment Mechanism
+    - Access Controls - In web applications, Access Controls are a set of rules dictate what mechanisms a client has access to.  These rules are defined based on different criteria, such as a Role or whether a client has been added to a specific Group.  You'll need to do this part of your enumeration in two steps.  First, identify the *Type* of access controls that are being implemented (there could be many).  Once you've identified the type, you can identify all the ways a client could potentially bypass these controls.  Once again, complexity = vulnerabilities.  The more complex the access contols are, the more difficult it is for developers to enforce them.  
+        - [Role-Based Access Control (RBAC)](https://auth0.com/docs/manage-users/access-control/rbac) - This is the most common type of Access Controls.  Applications will often have roles like Admin, User, Super User, etc. that allow granular permissions for each of the roles.  All user accounts with that role applied can leverage the mechanisms that role has access to.  In this case, you will want to see if you can execute mechanisms outside of the role's scope, especially if the mechanism is only accessible by a role with greater priviledges (User -> Admin).  
+        - [Discretionary Access Control (DAC)](https://en.wikipedia.org/wiki/Discretionary_access_control) - With DAC, a user is given explicit permission to a set of mechnaisms, usually part of a larger section within the application.  For example, [FIGMA](https://hackerone.com/figma?type=team) allows users to create Figma Boards that enable collaboration for designers and developers.  Once a user has created a Figma Board, they can invite other users to the board.  Those users can then invite other users (if the Admin allows).  If a user that has not been given an invite to the board can access the data on that board, they will have bypassed the DAC implementation.
+        - [Granular Policy-Based Access Controls (PBAC)](https://csrc.nist.gov/glossary/term/policy_based_access_control) - PBAC allow the developers to assign very granular permissions to individual users.  
     - Database Queries
 
 **Output**: *List of Attack Vectors Worth Your Time*
