@@ -174,7 +174,14 @@
 
 **Input**: *URL Pointing to Live Web Application Worth Your Time (Target URL)*
 
-- 
+- There are several places in a web application where sensitive data can be leaked.  For bug bounty researchers who prefer to focus on a Recon Heavy or Future Bugs methodology, finding and reporting these data leaks can be a fantastic way to generate passive income.  Keep in mind that you either need to be very fast or very creative here to find vulnerabilities other researchers are missing.  Everyone can download an open-source took and scan applications for leaked API keys (just an example).  You either need to find and report them first, or find ones that others are missing.  It's much easier to be creative than fast, in my opinion, but to each their own!
+- Data Leak Examples:
+    - API Key stored in client-side JavaScript
+    - Developers return full user object, including Password Hash and Salt, of all users within an instance of the application
+    - JSON Web Token (JWT) leaks server-side "seed" used to generate randomness, allowing attackers to predict behavior that should be random
+    - An array of all user messages in a chatbot, including private messages belonging to other users, are stored in State/Props of the React Virtual DOM
+    - An application's webpack is not properly obfuscated, showing how to access hidden debug API endpoints
+    - The current user's plain-text username and password are stored in localStorage for a better User Experience (app has an issue with logging users out, so the devs decide to store the username and password to send in a new API login request to make a better user experience)
 
 **Output**: *Data Valuable to an Attacker*
 
@@ -184,7 +191,7 @@
 
 **Input**: *Company Name*
 
-- 
+- There's a famous joke in the engineering industry that senior engineers are just really good at "Googling" questions.  And while that's obviously not the case, there is *some* truth behind the joke.  If you've never been a developer, I'll let you in on a little secret: developers don't memorize the code patterns they write.  As engineers work to build an application, they are constantly looking through documentation and public resources to identify/troubleshoot code patterns.  Inexperienced developers sometimes even post code snippets to ask for help or use public storage services to share code.  This is one example of where you can find secrets that might have leaked.  Below are some examples of public 
 
 **Output**: *Data Valuable to an Attacker*
 

@@ -1,6 +1,9 @@
 # My Full Bug Bounty Hunting Methodology - Logic
 
-*GOAL: HTTP Requests Sent In Specific Sequence Causes The Application To Act In An Unexpected Way*
+*GOAL: Send Unexpected HTTP Requests (Or a Series of Requests) to Cause the Application to Act in an Unexpected Way*
+
+- When hunting for logic vulnerabilities, your goal as the attacker is to send an HTTP Request (or sequence of requests) that the developers did not plan for.  Maybe they forgot to apply an Access Control to a specific endpoint/mechanism.  Or maybe they failed to validate that a client *should* be able to access a larger data set from a single unique identifier.  Maybe if you drop an request or two in a complex sequence, the mechanism fails open?  All of these are possibilities.  If you understand how an application works at a deep level and learn to identify insecure patterns, you can start to "bend" the logic of the application to cause unexpected behavior without actually breaking the app.
+
 Core Steps:
     - Understand the Application on a Deep Level
     - Identify Complex & Critical Mechanisms
@@ -38,6 +41,7 @@ Core Steps:
 
 # Enumerate The Mechanisms
 
+- 
 - *Think Like QE! How Would You Build Test Scripts?*
 
 ## CREATE
