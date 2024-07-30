@@ -18,11 +18,20 @@ Core Steps:
 - What additional client-side libraries are used? 
 - Does the app have any custom client-side JavaScript files?
 - Is there Authentication?
+    - Username/Password
+    - Email/Password
+    - Single Sign On (SSO)
+    - OAuth
 - What Objects can you enumerate?
 - How is session established?
-- How is a user identified?
-- Are there multiple user roles?
+- What type of Access Controls are implemeneted?
+    - Role-Based Access Controls (RBAC)
+    - Discretionary Access Controls (DAC)
+    - Policy-Based Access Controls (PBAC)
 - Is there an API?
+    - Internal or External?
+    - API Key or Session Token?
+    - Documentation
 - Is CORS implemented?
 - Is Captcha used?
 - Are WebSockets used?
