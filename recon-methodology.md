@@ -190,7 +190,9 @@
 
 **Input**: *Company Name*
 
-- There's a famous joke in the engineering industry that senior engineers are just really good at "Googling" questions.  And while that's obviously not the case, there is *some* truth behind the joke.  If you've never been a developer, I'll let you in on a little secret: developers don't memorize the code patterns they write.  As engineers work to build an application, they are constantly looking through documentation and public resources to identify/troubleshoot code patterns.  Inexperienced developers sometimes even post code snippets to ask for help or use public storage services to share code.  This is one example of where you can find secrets that might have leaked.  Below are some examples of public 
+- There's a famous joke in the engineering industry that senior engineers are just really good at "Googling".  And while that's obviously not the case, there is *some* truth behind the joke.  If you've never been a developer, I'll let you in on a little secret: developers don't memorize the code patterns they write.  As engineers work to build an application, they are constantly looking through documentation and public resources to identify/troubleshoot code patterns.  Inexperienced developers sometimes even post code snippets to ask for help or use public storage services to share code.  This is one example of where you can find secrets that might have leaked.  Below are a few examples of public resources where you may find leaked code or secrets:
+    - [StackOverflow](https://stackoverflow.com/)
+    - [Pastebin](https://pastebin.com/)
 
 **Output**: *Data Valuable to an Attacker*
 
