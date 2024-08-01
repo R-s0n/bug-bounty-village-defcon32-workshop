@@ -76,3 +76,106 @@
 - [ ] AWS Shield
 - [ ] Azure DDoS Protection
 - [ ] GCP Cloud Armor
+- [ ] Laravel
+- [ ] Symfony
+- [ ] Zend Framework
+- [ ] CakePHP
+- [ ] CodeIgniter
+- [ ] Play Framework
+- [ ] Struts
+- [ ] Grails
+- [ ] ASP.NET Core
+- [ ] ASP.NET MVC
+- [ ] Flask-RESTful
+- [ ] FastAPI
+- [ ] Pyramid
+- [ ] Tornado
+- [ ] Koa.js
+- [ ] Sails.js
+- [ ] NestJS
+- [ ] Backbone.js
+- [ ] Ember.js
+- [ ] Knockout.js
+- [ ] Mithril.js
+- [ ] Riot.js
+- [ ] Polymer
+- [ ] LitElement
+- [ ] Aurelia
+- [ ] Alpine.js
+- [ ] Stimulus
+- [ ] RedwoodJS
+- [ ] Blitz.js
+- [ ] Nuxt.js
+- [ ] Next.js
+- [ ] Eleventy
+- [ ] Jekyll
+- [ ] Hugo
+- [ ] Gatsby
+- [ ] Gridsome
+- [ ] Svelte
+- [ ] Sapper
+- [ ] SvelteKit
+- [ ] Webpack
+- [ ] Rollup
+- [ ] Parcel
+- [ ] Gulp
+- [ ] Grunt
+- [ ] Babel
+- [ ] TypeORM
+- [ ] Sequelize
+- [ ] Mongoose
+- [ ] Prisma
+- [ ] Apache HTTP Server
+- [ ] Nginx
+- [ ] Lighttpd
+- [ ] IIS (Internet Information Services)
+- [ ] Caddy
+- [ ] HAProxy
+- [ ] Traefik
+- [ ] Envoy
+- [ ] Redis
+- [ ] Memcached
+- [ ] Varnish
+- [ ] Apache Kafka
+- [ ] RabbitMQ
+- [ ] ActiveMQ
+- [ ] ZeroMQ
+- [ ] Celery
+- [ ] Sidekiq
+- [ ] Resque
+- [ ] Graphene
+- [ ] Apollo Server
+- [ ] Relay
+- [ ] Deno
+- [ ] Elixir
+- [ ] Phoenix Framework
+- [ ] Clojure
+- [ ] ClojureScript
+- [ ] F#
+- [ ] Haskell
+- [ ] Scala
+- [ ] Playwright
+- [ ] Puppeteer
+- [ ] Selenium
+- [ ] Cypress
+- [ ] TestCafe
+- [ ] Jest
+- [ ] Mocha
+- [ ] Chai
+- [ ] Jasmine
+- [ ] Karma
+- [ ] QUnit
+- [ ] Ava
+- [ ] Enzyme
+- [ ] Storybook
+- [ ] Tailwind CSS
+- [ ] Bulma
+- [ ] Foundation
+- [ ] Semantic UI
+- [ ] Materialize CSS
+- [ ] Ant Design
+- [ ] PrimeNG
+- [ ] Chakra UI
+- [ ] Evergreen
+- [ ] Vuetify
+- [ ] Quasar Framework
