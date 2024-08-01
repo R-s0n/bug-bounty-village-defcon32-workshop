@@ -1,8 +1,78 @@
 # Skills Checklist
 
-- OFFENSIVE
-    - 
-
-
-- DEFENSIVE
-    - 
+- [ ] HTML
+- [ ] CSS
+- [ ] JavaScript
+- [ ] TypeScript
+- [ ] PHP
+- [ ] Ruby on Rails
+- [ ] ASP.NET
+- [ ] Node.js
+- [ ] Express.js
+- [ ] Django
+- [ ] Flask
+- [ ] Java
+- [ ] Spring Framework
+- [ ] Angular
+- [ ] React.js
+- [ ] Vue.js
+- [ ] jQuery
+- [ ] Bootstrap
+- [ ] RESTful APIs
+- [ ] GraphQL
+- [ ] SOAP
+- [ ] JSON
+- [ ] XML
+- [ ] WebSockets
+- [ ] AJAX
+- [ ] HTTP/HTTPS
+- [ ] WebRTC
+- [ ] OAuth
+- [ ] JWT (JSON Web Tokens)
+- [ ] SAML
+- [ ] OpenID Connect
+- [ ] Content Security Policy (CSP)
+- [ ] Cross-Origin Resource Sharing (CORS)
+- [ ] Subdomain Takeover
+- [ ] DNS Security
+- [ ] Web Application Firewalls (WAFs)
+- [ ] Amazon Web Services (AWS)
+- [ ] Microsoft Azure
+- [ ] Google Cloud Platform (GCP)
+- [ ] Kubernetes
+- [ ] Docker
+- [ ] Terraform
+- [ ] Ansible
+- [ ] Jenkins
+- [ ] GitLab CI/CD
+- [ ] Travis CI
+- [ ] CircleCI
+- [ ] CloudFormation
+- [ ] Serverless Framework
+- [ ] Lambda
+- [ ] Azure Functions
+- [ ] Google Cloud Functions
+- [ ] IAM (Identity and Access Management)
+- [ ] VPC (Virtual Private Cloud)
+- [ ] Security Groups
+- [ ] Network ACLs
+- [ ] S3 Buckets
+- [ ] CloudTrail
+- [ ] CloudWatch
+- [ ] GuardDuty
+- [ ] IAM Policies
+- [ ] Encryption (KMS)
+- [ ] Secrets Manager
+- [ ] AWS Config
+- [ ] Azure Security Center
+- [ ] GCP Security Command Center
+- [ ] Cloud Security Posture Management (CSPM)
+- [ ] Cloud Workload Protection Platform (CWPP)
+- [ ] Cloud Access Security Broker (CASB)
+- [ ] Identity Federation
+- [ ] Single Sign-On (SSO)
+- [ ] Multi-Factor Authentication (MFA)
+- [ ] Bastion Hosts
+- [ ] AWS Shield
+- [ ] Azure DDoS Protection
+- [ ] GCP Cloud Armor
