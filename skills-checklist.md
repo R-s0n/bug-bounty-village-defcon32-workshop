@@ -1,5 +1,9 @@
 # Skills Checklist
 
+## Defensive Skills
+
+*Which of the following technologies do you have experience building and securing?*
+
 - [ ] HTML
 - [ ] CSS
 - [ ] JavaScript
@@ -179,3 +183,266 @@
 - [ ] Evergreen
 - [ ] Vuetify
 - [ ] Quasar Framework
+
+## Offensive Skills
+
+*Which of the following tools/techniques do you have experience weaponizing?*
+
+- [ ] SQL Injection
+- [ ] NoSQL Injection
+- [ ] Command Injection
+- [ ] Cross-Site Scripting (XSS)
+- [ ] Cross-Site Request Forgery (CSRF)
+- [ ] Server-Side Request Forgery (SSRF)
+- [ ] Local File Inclusion (LFI)
+- [ ] Remote File Inclusion (RFI)
+- [ ] Directory Traversal
+- [ ] Authentication Bypass
+- [ ] Authorization Flaws
+- [ ] Session Fixation
+- [ ] Session Hijacking
+- [ ] Cookie Poisoning
+- [ ] XML External Entity (XXE) Injection
+- [ ] HTTP Header Injection
+- [ ] Business Logic Flaws
+- [ ] Insecure Direct Object References (IDOR)
+- [ ] Clickjacking
+- [ ] Subdomain Takeover
+- [ ] DNS Rebinding
+- [ ] DNS Spoofing
+- [ ] HTTP Response Splitting
+- [ ] CRLF Injection
+- [ ] Cache Poisoning
+- [ ] Password Spraying
+- [ ] Brute Force Attacks
+- [ ] Credential Stuffing
+- [ ] Social Engineering
+- [ ] Phishing
+- [ ] Man-in-the-Middle (MITM) Attacks
+- [ ] Exploiting Unsecure APIs
+- [ ] Broken Access Control
+- [ ] Insecure Deserialization
+- [ ] Exploiting Weak SSL/TLS Configurations
+- [ ] Exploiting Misconfigured CORS
+- [ ] HTTP Parameter Pollution
+- [ ] HTTP Smuggling
+- [ ] Exploiting Insecure File Uploads
+- [ ] API Endpoint Fuzzing
+- [ ] GraphQL Injection
+- [ ] Cache Deception
+- [ ] Exploiting Information Disclosure
+- [ ] Exploiting Insufficient Logging and Monitoring
+- [ ] Race Condition Exploits
+- [ ] Time-based Attacks
+- [ ] Blind SQL Injection
+- [ ] Blind XSS
+- [ ] Second-order SQL Injection
+- [ ] Second-order XSS
+- [ ] Host Header Injection
+- [ ] HTTP Host Header Attack
+- [ ] Exploiting CSP Bypass
+- [ ] Exploiting HSTS Bypass
+- [ ] Exploiting X-Frame-Options Bypass
+- [ ] Exploiting X-Content-Type-Options Bypass
+- [ ] DNS Tunneling
+- [ ] Exploiting Weak JWT Implementation
+- [ ] Exploiting Insecure Deserialization
+- [ ] Exploiting Exposed Git Directories
+- [ ] Path Traversal Attacks
+- [ ] Cross-Site Script Inclusion (XSSI)
+- [ ] Exploiting HTTP Verb Tampering
+- [ ] Exploiting User Enumeration
+- [ ] Burp Suite
+- [ ] OWASP ZAP
+- [ ] Fiddler
+- [ ] Postman
+- [ ] Insomnia
+- [ ] SQLMap
+- [ ] Nmap
+- [ ] Metasploit
+- [ ] Nikto
+- [ ] Dirb
+- [ ] Gobuster
+- [ ] Recon-ng
+- [ ] Sublist3r
+- [ ] Amass
+- [ ] MassDNS
+- [ ] Aquatone
+- [ ] Eyewitness
+- [ ] Arachni
+- [ ] Wapiti
+- [ ] WPScan
+- [ ] CMSmap
+- [ ] WhatWeb
+- [ ] Wappalyzer
+- [ ] Shodan
+- [ ] Censys
+- [ ] Nessus
+- [ ] OpenVAS
+- [ ] Acunetix
+- [ ] Netsparker
+- [ ] XSSer
+- [ ] XSStrike
+- [ ] PayloadsAllTheThings
+- [ ] SecLists
+- [ ] PwnXSS
+- [ ] BeEF (Browser Exploitation Framework)
+- [ ] Social-Engineer Toolkit (SET)
+- [ ] Hydra
+- [ ] John the Ripper
+- [ ] Hashcat
+- [ ] Aircrack-ng
+- [ ] Responder
+- [ ] CrackMapExec
+- [ ] Evilginx2
+- [ ] Mimikatz
+- [ ] BloodHound
+- [ ] Empire
+- [ ] Covenant
+- [ ] Cobalt Strike
+- [ ] Gophish
+- [ ] Sn1per
+- [ ] SpiderFoot
+- [ ] Sentry MBA
+- [ ] Burpsuite's Collaborator
+- [ ] WebInspect
+- [ ] sqlninja
+- [ ] Joomscan
+- [ ] Droopescan
+- [ ] WPScan
+- [ ] Vulners
+- [ ] SearchSploit
+- [ ] Exploit-DB
+- [ ] Nexpose
+- [ ] Snort
+- [ ] Suricata
+- [ ] Yersinia
+- [ ] Ettercap
+- [ ] Dsniff
+- [ ] Wireshark
+- [ ] Tcpdump
+- [ ] Netcat
+- [ ] Socat
+- [ ] Swaks
+- [ ] Nuclei
+- [ ] FFUF
+- [ ] Interlace
+- [ ] Vhostscan
+- [ ] Subjack
+- [ ] Subfinder
+- [ ] Assetfinder
+- [ ] Altdns
+- [ ] DNSDumpster
+- [ ] Findomain
+- [ ] Gau
+- [ ] GitTools
+- [ ] TruffleHog
+- [ ] ScoutSuite
+- [ ] CloudMapper
+- [ ] Prowler
+- [ ] Pacu
+- [ ] DNS Cache Poisoning
+- [ ] Code Injection
+- [ ] LDAP Injection
+- [ ] XPath Injection
+- [ ] IMAP/SMTP Injection
+- [ ] Buffer Overflow
+- [ ] Heap Spraying
+- [ ] Format String Vulnerabilities
+- [ ] Integer Overflow
+- [ ] Padding Oracle Attacks
+- [ ] Exploiting Weak Password Policies
+- [ ] Exploiting Hardcoded Credentials
+- [ ] Binary Exploitation
+- [ ] Reverse Engineering
+- [ ] Mobile App Security Testing
+- [ ] Token Impersonation
+- [ ] Token Replay Attacks
+- [ ] Exploiting Insecure Cryptographic Storage
+- [ ] Exploiting Insecure Transport Layer
+- [ ] Cross-Site Script Inclusion (XSSI)
+- [ ] Server-Side Template Injection (SSTI)
+- [ ] Exploiting Insufficient Transport Layer Protection
+- [ ] HTTP Parameter Pollution
+- [ ] Exploiting Insecure Third-Party Libraries
+- [ ] Exploiting Insecure Software Deployment
+- [ ] Exploiting Outdated Software
+- [ ] Exploiting Unpatched Vulnerabilities
+- [ ] Lateral Movement
+- [ ] Privilege Escalation
+- [ ] Exploiting Insecure Network Architecture
+- [ ] Exploiting Open Redirects
+- [ ] URL Redirection Abuse
+- [ ] Protocol Downgrade Attacks
+- [ ] Exploiting Weak Access Controls
+- [ ] Exploiting Insecure Configuration Management
+- [ ] Exploiting Misconfigured Cloud Services
+- [ ] Exploiting Excessive Permissions
+- [ ] Exploiting Default Credentials
+- [ ] Exploiting Weak Session Management
+- [ ] Exploiting Weak Multi-Factor Authentication (MFA)
+- [ ] Exploiting Weak API Security
+- [ ] Exploiting Misconfigured Containers
+- [ ] Exploiting Misconfigured Virtual Machines
+- [ ] Exploiting Misconfigured Databases
+- [ ] Exploiting Weak Network Segmentation
+- [ ] Fileless Malware Attacks
+- [ ] Exploiting Remote Code Execution (RCE)
+- [ ] Exploiting Deserialization Vulnerabilities
+- [ ] Exploiting Serialization Vulnerabilities
+- [ ] Exploiting Code Reuse
+- [ ] Exploiting Stack Overflow
+- [ ] Exploiting Return-Oriented Programming (ROP)
+- [ ] Exploiting JTAG
+- [ ] Exploiting SPI
+- [ ] Exploiting UART
+- [ ] Exploiting Side-Channel Attacks
+- [ ] Timing Attacks
+- [ ] Power Analysis
+- [ ] Electromagnetic Analysis
+- [ ] Fault Injection
+- [ ] Web Cache Deception Attack
+- [ ] Clickjacking Attack
+- [ ] JSON Web Token (JWT) Cracking
+- [ ] Log Injection
+- [ ] DOM XSS
+- [ ] Stored XSS
+- [ ] Reflected XSS
+- [ ] Server-Side XSS
+- [ ] HQL Injection
+- [ ] DQL Injection
+- [ ] Memory Corruption
+- [ ] Command and Control (C2) Communication
+- [ ] Covert Channels
+- [ ] Domain Generation Algorithms (DGA)
+- [ ] Steganography
+- [ ] Credential Dumping
+- [ ] System Command Injection
+- [ ] Mail Command Injection
+- [ ] ARP Spoofing
+- [ ] Email Spoofing
+- [ ] BGP Hijacking
+- [ ] DNS Hijacking
+- [ ] Data Exfiltration
+- [ ] Exploiting SSRF
+- [ ] LFI to RCE
+- [ ] RFI to RCE
+- [ ] HTML Injection
+- [ ] Email Injection
+- [ ] Malicious File Upload
+- [ ] ROP Gadgets
+- [ ] Heap Exploitation
+- [ ] DLL Hijacking
+- [ ] PE Injection
+- [ ] Shellcode Injection
+- [ ] Polymorphic Code
+- [ ] Metamorphic Code
+- [ ] Process Hollowing
+- [ ] Process Doppelgänging
+- [ ] Exploiting Race Conditions
+- [ ] Exploiting Insecure Permissions
+- [ ] Exploiting Weak Firewall Configurations
+- [ ] Exploiting Unrestricted File Uploads
+- [ ] HTML5 Security Issues
+- [ ] Browser Exploits
+- [ ] DNS Zone Transfer Attack
