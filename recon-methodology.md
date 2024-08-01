@@ -169,6 +169,8 @@
 
 # Findind Bugs w/ Recon
 
+*SUMMARY: Once your recon is complete, you should have a huge amount of data about the target's attack surface.  Instead of moving on to manual testing, some bug bounty hunters may prefer to use this data in combination with additional automation scripts to find bugs without any manual testing.  Below are a few examples of how this can be accomplished.*
+
 ## Leaked Secrets (In-App)
 
 **Input**: *URL Pointing to Live Web Application Worth Your Time (Target URL)*
