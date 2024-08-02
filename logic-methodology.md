@@ -16,11 +16,12 @@ The best programs to do logic testing on are Software-as-a-Service (SaaS) compan
 
 ## Architecture
 
-- What language is the back-end written in?
-- Is the app using a client-side library? (React, Angular, NextJS, etc.)
-- What additional client-side libraries are used? 
-- Does the app have any custom client-side JavaScript files?
-- Is there Authentication?
+- *What language is the back-end written in?* - Each server-side language has unique properties that effect the way a bug bounty hunter will approach it.  This is especially true for injection testing, but there are several ways the server-side language can effect how the logic of an application executes.  Here are some examples:
+    - 
+- *Is the app using a client-side library? (React, Angular, NextJS, etc.)* - 
+- *What additional client-side libraries are used?* - 
+- *Does the app have any custom client-side JavaScript files?* - 
+- *Is there Authentication?* - 
     - Username/Password
     - Email/Password
     - Single Sign On (SSO)
