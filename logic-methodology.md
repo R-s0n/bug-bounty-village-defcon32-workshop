@@ -12,7 +12,7 @@ When hunting for logic vulnerabilities, your goal as the attacker is to send an 
 
 # Learn The App
 
-
+The best programs to do logic testing on are Software-as-a-Service (SaaS) companies that have large, complex web applications.  The application must have authentication and should have complex access controls, a wide range of mechanisms/functionality, and designed to be used by a large number of users simulatenously.  Unlike injection testing where you can isolate specific attack vectors, logic testing requires requires the bug bounty hunter to see the "bigger picture" of how the different components of an application work together.  You must first understand how the app works so you can identify the cracks and try to bend/break the logic.  *Before I begin logic testing a target application, I spend at least 2-3 days understanding how the application works before I do ANY testing.*  Your mindset should be that you have been hired by this company and are now part of their application security team.  
 
 ## Architecture
 
