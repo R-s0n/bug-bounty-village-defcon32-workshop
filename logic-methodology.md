@@ -94,23 +94,30 @@ Every HTTP Request can be mapped to a CRUD Operation and specific mechanism in t
 
 # Test The App
 
+At this point, you should be very familiar with the application, have a ton of notes written about the app, and have identified/documented the majority of the mechanisms.  You're finally ready to begin testing!  I start by walking through each of the mechanisms to check for IDORs and ACVs.  Next, I test any available OAuth flows for misconfigurations that could allow me to steal a valid access token, spoof a valid access token, expand the scope, etc.  Finally, I conduct creative testing on the more complex mechanisms that require is long sequence of HTTP Requests to execute.  This testing is hard to standardize, but I will do my best to give you tips and examples from bugs I have found.
+
 ## Missing Security Controls
 
-- Lack of Access Controls
-- Lack of Rate Limiting
+- **Lack of Access Controls** - In this case, the developers failed to apply access controls on a specific mechanism.  *This does not mean that you were able to change the HTTP request to bypass the access controls, that will come later.*  This is a simple case of a developer forgetting to check if a user is authorized to execute a mechanism.  Here are a few examples:
+    - ***Unauthenticated -> Authenticated*** - An unauthenticated user is able to access a web-based tool at `/querytool` that should only allow authenticated users to query a SQL Database running on the local server.  
+    - ***Role-Based Access Control (RBAC)*** - A user with the role `Auditor` should only have access to READ mechanisms, but you discover that a user with the `Auditor` role can execute an UPDATE mechanism to modify the data they are auditing.
+    - ***Discretionary Access Control (DAC)*** - A user without access to a Workspace can modify the description of the workspace by sending an `UPDATE` request to `/workspace/[WORKSPACE_ID]/desc`.
+    - ***Policy-Based Access Control (PBAC)*** - A user has not been assigned the policy `project:delete` which allows them to delete projects they have access to, but you discover that you can delete a project without that policy being applied to your user object.
+- In each of these cases, the developers simply forgot to add a check to validate the authorization given to the user.  There's nothing fancy here, you just need to walk through each mechanism and check one by one.  Notes are mandatory, scripting can be very helpful, but what makes these great targets for bug bounty hunters is how difficult it can be to automate testing for lack of access controls.
+- **Lack of Rate Limiting** - Just like with the previous test, we aren't looking for a way to bypass rate limiting yet.  We're simply looking for mechanisms that *should* have rate limiting but don't.  Keep in mind that this can be a grey area on a lot of bug bounty programs, it can be very hard to show impact with a lack of rate limiting.  It's important that you can clearly explain how not having rate limiting on a mechanism could have a significant impact on the application's security posture.  For example, if spamming an endpoint causes a security control to [fail open](https://community.cisco.com/t5/security-knowledge-base/fail-open-amp-fail-close-explanation/ta-p/5012930#:~:text=Fail%2DOpen%3A%20In%20a%20fail,availability%20is%20prioritized%20over%20security.), that would be a clear way to show impact.
 
 ## Bypass Security Controls
 
-- Bypass Access Controls
-    - Unauthenticated -> Authenticated
-    - RBAC Bypass
-    - Granular Access Control Bypass
-- Bypass Rate Limiting
-- Bypass 2FA/MFA
-- Bypass Payment Process Restrictions
-- Bypass Captcha
-- Bypass Registration Restrictions
-- Bypass Password Reset Restrictions
+- [***Bypass Access Controls***](https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/403-and-401-bypasses) - Now that you've gone through each of the mechanisms you identified whether they have access controls applied, you can now try to bypass those access controls.  To do this, you first need to identify *why* the server is asserting that you do not have the access required to execute that mechanism.  Here are some examples and ways to possibly bypass the control:
+    - *IP Address* - Some mechanisms, especially those meant to be internal (and probably very sensitive/critical), are restricted by IP Address.  You can attempt to find a [Server-Side Request Forgery (SSRF)](https://portswigger.net/web-security/ssrf) that would allow you to send a request to the endpoint from an internal IP, but that's not always possible.  Another strategy is to try using [HTTP Proxy Headers](https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/403-and-401-bypasses#http-headers-fuzzing) to trick the application into thinking you have a different IP.
+    - *Path Fuzzing* - Sending unexpected characters as part of the [URL Path](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_URL#path_to_resource).  For example, if a GET request to `/admin/login` returns a [403 Response](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403), try changing the path to `/ADMIN/LOGIN` or `/admin//;//login`, just as a few examples.  Many more examples can be found [here](https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/403-and-401-bypasses#path-fuzzing) and there are many great automated tools that est this, for example [403Bypasser](https://portswigger.net/bappstore/444407b96d9c4de0adb7aed89e826122) for Burpsuite.  You can always just use [ffuf](https://github.com/ffuf/ffuf) as well, or just script it yourself.
+    - *Unexpected Access Patterns* - The developers have very specific expecations about how a client will access their application.  They build their app to be accessed through a web browser with the [Fully-Qualified Domain Name (FQDN)](https://en.wikipedia.org/wiki/Fully_qualified_domain_name) over HTTPS.  So, as a bug bounty hunter, your goal is to access the app in ways they did NOT expect.  Look through the DNS records and try to access the app directly through the IP Address.  If there is a [CNAME Record](https://support.google.com/a/answer/112037?hl=en#zippy=%2Cset-up-cname-records-now), try both domains.  If the app is hosted on HTTPS, try accessing endpoints via HTTP on port 80.  If the app is using HTTP/2, try downgrading to HTTP/1.1. These all might cause the application's access controls to fail open.
+    - *Hidden Parameters* - Try adding parameters like `isAdmin=True` to see if it has any effect.  You might get lucky!
+- ***Bypass Rate Limiting***
+- ***Bypass 2FA/MFA***
+- ***Bypass Payment Process Restrictions***
+- ***Bypass Registration Restrictions***
+- ***Bypass Password Reset Restrictions***
 
 ## Insecure Direct Object Reference (IDOR)
 
@@ -225,3 +232,8 @@ Step 1: Check for dynamic registration (is some form of authentication required,
 Step 2: Craft a malicious registration payload for SSRF
 
 ## Creative Testing
+
+- Online Shopping
+- Payment Process
+- Gaming/Luck
+- Gift Cards
