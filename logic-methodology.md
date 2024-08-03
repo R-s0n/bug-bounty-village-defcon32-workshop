@@ -59,18 +59,38 @@ Every HTTP Request can be mapped to a CRUD Operation and specific mechanism in t
 ## CREATE
 - POST -> `/user/register` --data `{"username":"rs0n","password":"P@s$w0rd!"}`
     - Allows unauthenticated users to create a new account
+    - IDOR: Not possible, same response to all clients regardless of identity
+    - ACV: Not possible, this mechansim is available to unauthenticated users
+- POST -> `/workspace` --data `{"name":"shared workspace 1"}`
+    - Allows Admin users to create a new Workspace
+    - IDOR: Not possible, same response to all clients regardless of identity
+    - ACV: Possible, only Admins can create new Workspaces, test with all other roles to bypass RBAC
 
 ## READ
 - POST -> `/user/login` --data `{"username":"rs0n","password":"P@s$w0rd!"}`
     - Allows users with a valid account to log into the application
+    - IDOR: Not possible, response depends on input not identity
+    - ACV: Not possible, this mechansim is available to unauthenticated users
+- GET -> `/admin/user/[USER_ID]/search`
+    - Allows Admin users to look up detailed information about all other users in a specific Workspace
+    - IDOR: Possible, can the Admin look up user information in a Workspace they do not belong to?
+    - ACV: Possible, only Admins can access sensitive user information, test with all other roles to bypass RBAC
 
 ## UPDATE
 - POST -> `/user/profile/update/username` --data `{"username":"rs0n_live"}`
     - Allows users to change their username
+    - IDOR: Possible, User ID in JWT Cookie used to identify client.  Need to cause JWT validation to fail first.
+    - ACV: Not possible, this mechanisms is available to all users.  Unauthenticated users would still need to get an IDOR as part of their ACV.
+- UPDATE -> `/workspace/[WORKSPACE_ID]`
+    - Allows all users with access to a workspace to update the description and other non-critical data points
+    - IDOR: Possible, can users update these values on workspaces they are not members of?
+    - ACV: Possible, but basically the same attack as IDOR.  Sometimes they lines are a bit blurry between the two.
 
 ## DELETE
 - POST -> `/user/delete` --data `{"username":"rs0n","password":"P@s$w0rd!","confirm":true}`
     - Allows users to delete their account by submitting their valid password and checking a confirmation box
+    - IDOR: Possible, User ID in JWT Cookie used to identify client.  Need to cause JWT validation to fail first.
+    - Not possible, this mechanisms is available to all users.  Unauthenticated users would still need to get an IDOR as part of their ACV.
 
 # Test The App
 
