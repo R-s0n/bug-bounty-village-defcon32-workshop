@@ -1,5 +1,9 @@
 # defcon32-workshop
 
+<div align="center">
+  <a href="https://youtu.be/PqBtg-CMSWo"><img src="static/workshop.png" width="600px" alt="Youtube Thumbnail"></a>
+</div>
+
 Very much a work in progress :)
 
 I hope to see you there!!  
