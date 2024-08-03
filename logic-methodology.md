@@ -27,8 +27,8 @@ The best programs to do logic testing on are Software-as-a-Service (SaaS) compan
     - Email/Password
     - Single Sign On (SSO)
     - OAuth
-- What Objects can you enumerate?
 - How is session established?
+- What Objects can you enumerate?
 - What type of Access Controls are implemeneted?
     - Role-Based Access Controls (RBAC)
     - Discretionary Access Controls (DAC)
