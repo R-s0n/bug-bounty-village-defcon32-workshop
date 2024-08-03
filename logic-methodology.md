@@ -52,21 +52,25 @@ The best programs to do logic testing on are Software-as-a-Service (SaaS) compan
 
 # Enumerate The Mechanisms
 
-
+Every HTTP Request can be mapped to a CRUD Operation and specific mechanism in the application.  Your goal as a bug bounty hunter is to identify every single mechanism in your target application to give you the greatest chance of finding gaps in their security.  Each of these mechanisms is likely a unique target for both Access Control Violation and IDOR testing.  Before you begin any logic testing on your target, you should manually go through and identify as many mechanisms as you can.  This will help give you a full picture of what options are available to you as an attacker, as well as what mechanisms may have downstream effects on the others.  This is the final step I take before actually doing logic testing, and it can take a day or two.  Below are some examples of mechanisms with critical functions that you may find.
 
 *Think Like QE! How Would You Build Test Scripts?*
 
 ## CREATE
-- 
+- POST -> `/user/register` --data `{"username":"rs0n","password":"P@s$w0rd!"}`
+    - Allows unauthenticated users to create a new account
 
 ## READ
-- 
+- POST -> `/user/login` --data `{"username":"rs0n","password":"P@s$w0rd!"}`
+    - Allows users with a valid account to log into the application
 
 ## UPDATE
-- 
+- POST -> `/user/profile/update/username` --data `{"username":"rs0n_live"}`
+    - Allows users to change their username
 
 ## DELETE
-- 
+- POST -> `/user/delete` --data `{"username":"rs0n","password":"P@s$w0rd!","confirm":true}`
+    - Allows users to delete their account by submitting their valid password and checking a confirmation box
 
 # Test The App
 
