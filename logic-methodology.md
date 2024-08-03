@@ -60,15 +60,8 @@ The best programs to do logic testing on are Software-as-a-Service (SaaS) compan
 - Is there a Content Security Policy?
 - How is user-controlled input rendered/encoded in the DOM?
 
-## Best Practices
-
-- Are there useful comments?
-- Can you trigger any error messages?
-- Is the source code publicly available?
-
 # Enumerate The Mechanisms
 
-- 
 - *Think Like QE! How Would You Build Test Scripts?*
 
 ## CREATE
