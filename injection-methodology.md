@@ -8,17 +8,17 @@ Injection attacks occur when user-controlled input in an HTTP Request is process
 
 The first step to finding any type of injection vulnerability is to find a specific pattern of user-controlled input that causes the unexpected behavior.  That *specific pattern* causing the unexpected behavior is known as a [payload](https://www.scaler.com/topics/cyber-security/what-are-payloads/).  When you begin to test for injection vulnerabilities, your payloads will be very simple, sually just a single character or HTML element.  You'll start by sending HTTP Requests to endpoints as intended and recording the expected response.  This allows you to establish a baseline of what the application's expected behavior is.  Then, you will send your payloads one-by-one to various attack vectors within the HTTP Request, looking for variations in the response.  If the response is different from the baseline, you have found a place where user-controlled input causes the application to act in an unexpected way.  Here are a few examples:
 
-Baseline: GET -> `/fetch?dest=safeapp.com` results in [200 Response](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) with the message `Done!`
-Variation GET -> `/fetch?dest=safeapp.com@` results in a [500 Response](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500) with the message `ERROR: Site cannot be reached!`
-Unexpected Behavior: The response code changes to represent an error has occured.
+- Baseline: GET -> `/fetch?dest=safeapp.com` results in [200 Response](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) with the message `Done!`
+- Variation GET -> `/fetch?dest=safeapp.com@` results in a [500 Response](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500) with the message `ERROR: Site cannot be reached!`
+- Unexpected Behavior: The response code changes to represent an error has occured.
 
-Baseline: GET -> `/search?q=rs0n` results in an empty JSON Object being returned, along with a 200 Response
-Variation GET -> `/search?q=rs0n"` results in a 500 Response
-Unexpected Behavior: The response code changes to represent an error has occured and nothing is returned.
+- Baseline: GET -> `/search?q=rs0n` results in an empty JSON Object being returned, along with a 200 Response
+- Variation GET -> `/search?q=rs0n"` results in a 500 Response
+- Unexpected Behavior: The response code changes to represent an error has occured and nothing is returned.
 
-Baseline: GET -> `/welcome?user=rs0n` results in `<h1>Welcome rs0n</h1>`
-Variation: GET -> `/welcome?user=<b>rs0n</b>` results in `<h1>Welcome <b>rs0n</b></h1>`
-Unexpected Behavior: DOM renders [Formatted Text](https://www.w3schools.com/html/html_formatting.asp) HTML elements the developer did not intend to render.
+- Baseline: GET -> `/welcome?user=rs0n` results in `<h1>Welcome rs0n</h1>`
+- Variation: GET -> `/welcome?user=<b>rs0n</b>` results in `<h1>Welcome <b>rs0n</b></h1>`
+- Unexpected Behavior: DOM renders [Formatted Text](https://www.w3schools.com/html/html_formatting.asp) HTML elements the developer did not intend to render.
 
 ### Step 2: Finding WHERE the Break is Occurring
 
