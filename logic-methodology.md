@@ -123,10 +123,28 @@ At this point, you should be very familiar with the application, have a ton of n
 
 ## Insecure Direct Object Reference (IDOR)
 
-- ***Does the endpoint return a unique response based on the client's identity?***
-- ***Does the endpoint identify the client by establishing a User Context via a Session Token?***
-- ***Does the endpoint identify the client through an ID value with a signature (JWT, etc.)***
-- ***Does the endpoint simply pull an ID value from a parameter?***
+*SUMMARY: [Insecure Direct Object References (IDORs)](https://portswigger.net/web-security/access-control/idor) occur when an application fails to validate that a client is authorized to access the data contained in a specific object.  Every mechanism in a web application performs a CRUD operation on data stored in the application's database.  To accomplish this, the application must find some way to identify the object that is being read/modified/deleted (IDORs don't typically come into play on CREATE mechanisms).  A method in the server-side code is designed to take a unique identifier and query the database for the data set represented by that unique identifier.  How this works exactly depends on the technology stack, but from a security standpoint they all do the same thing. The vulnerability occurs when the application fails to validate that the user submitting the unique identifier is authorized to access the larger data set.  
+
+[YouTube Video - [Part I] Bug Bounty Hunting for IDORs and Access Control Violations](https://youtu.be/BfbS8uRjeAg)
+
+### Basic IDOR Hunting Steps
+
+1. Identify a mechanism that performs a READ, UPDATE, or DELETE operation.
+2. Determine how the data being modified is being identified in the database.
+    - *From the Session Token?* - This only happens when the data being modified is directly linked to the user's identity, but it can be very hard to get an IDOR with this pattern.
+    - *From an ID Value Signed for Integrity?* - If the ID value is in a JSON Web Token (JWT) or similar signed data store, then you need to break the signature validation before you can control the ID value and test for IDORs.
+    - *From a user-controlled parameter?* - Jackpot, this is the best case scenario for IDORs.
+3. Find and document the unique identifier of another object of the same type you should not have access to.
+4. Attempt to access the other object to test whether the application is verifying your authorization to access that data.
+
+[YouTube Video - Ask Yourself These Four Questions When Bug Bounty Hunting for IDORs](https://youtu.be/4h42AFrpyK0)
+
+To identify mechanisms that are good targets for IDORs, ask yourself these four questions for every mechanism:
+
+- *Does the endpoint return a unique response based on the client's identity?*
+- *Does the endpoint identify the client by establishing a User Context via a Session Token?*
+- *Does the endpoint identify the client through an ID value with a signature (JWT, etc.)*
+- *Does the endpoint simply pull an ID value from a parameter?*
 
 ## OAuth Testing
 
@@ -232,10 +250,3 @@ client_id=12345&client_secret=SECRET&redirect_uri=https://client-app.com/callbac
 
 Step 1: Check for dynamic registration (is some form of authentication required, like a Bearer token?)
 Step 2: Craft a malicious registration payload for SSRF
-
-## Creative Testing
-
-- ***Online Shopping***
-- ***Payment Process***
-- ***Gaming/Luck***
-- ***Gift Cards***
