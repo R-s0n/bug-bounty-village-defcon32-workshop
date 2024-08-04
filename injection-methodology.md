@@ -107,8 +107,9 @@ For each of our injections, we now have a good idea about what mechanism we are 
 
 [YouTube Video - Bug Bounty Hunting for Client-Side Injection Vulnerabilities | Part I](https://youtu.be/cnL7CB-Gak0)
 
-- **Input**: Single Attack Vector w/ Possible Injection
-- Injecting HTML
+### Basic Hunting Methodology
+
+- **Injecting HTML Elements Directly**
     1. Find Reflected User-Controlled Input
         - `rs0n` in GET parameter reflected in `<h1>Welcome rs0n!</h1>`
     2. Escalate to HTML Injection
@@ -116,15 +117,38 @@ For each of our injections, we now have a good idea about what mechanism we are 
         - `rs0n` is bold in browser
     3. Escalate to JavaScript Execution
         - `</h1><script>alert(document.domain)</script>` executes an alert w/ `document.domain`
-- Injecting JavaScript
-    - Typical JavaScript Injection
-    - Client-Side Prototype Pollution
-    - PostMessage Vulnerabilities
-- Injecting CSS
-    - Find Reflected User-Controlled Input in CSS
-    - Escalate to Inject CSS
-    - Escalate to Inject External Resources Loaders
-- Weaponizing HTML-Based Client-Side Injections:
+- **Injecting HTML Elements via JavaScript**
+    1. User-Controlled Input is Taken From DOM and Processed by Client-Side JavaScript w/o Sanitizing
+        - `location.hash` passed to `document.write` via Inline JavaScript
+    2. Escalate to HTML Injection
+        - `https://vulnerable.app#<h1>rs0nwuzhere</h1>` loads `<h1>rs0nwuzhere</h1>` in the DOM
+    3. Escalate to JavaScript Execution
+        - `https://vulnerable.app#<img%20src=1%20onerror=alert(document.domain)>`
+- [**Injecting CSS**](https://book.hacktricks.xyz/pentesting-web/xs-search/css-injection) - CSS Injection works the same as the previous two, depending on how the user-controlled input is reflected in the CSS. 
+- **[Client-Side Prototype Pollution (CSPP)](https://youtu.be/guPuPblLPI8)**
+    1. Find a [Deep Merge](https://medium.com/@abbas.ashraf19/8-best-methods-for-merging-nested-objects-in-javascript-ff3c813016d9) Method (Custom or NPM Package)
+    2. User-Controlled Input as Key/Value Pair in One of Objects Being Merged
+        - `{"rs0n":"rs0n","key1":"value1"}` merged w/ `{"key2":"value2","key3":"value3"}`
+    3. Poison Prototype of All JavaScript Objects in Running Memory
+        - `{"__proto__":{"rs0n":"rs0n"},"key1":"value1"}` merged w/ `{"key2":"value2","key3":"value3"}`
+    4. Identify a Prototype Pollution [Gadget Chain](https://medium.com/@isuk4/secrets-about-gadget-chains-1c2ee60d2000)
+        - `config = {"url":"safe.com","default":true}; document.write("<a href=" + config.url + ">Click Here!</a>")`
+    5. Poison Prototype to Exploit Gadget Chain
+        - `{"__proto__":{"url":"data:,alert(document.domain)"},"key1":"value1"}` merged w/ `{"key2":"value2","key3":"value3"}`
+- **Attack Techniques**
+    - ***Content Injection*** - Content injection refers to a type of web vulnerability where attackers manipulate a website's content by injecting malicious code or data into the site's input fields, comments, or other interactive elements. This can lead to the unauthorized display of altered content, using malicious URLs for phishing sophisticated attacks, or the dissemination of harmful links or scripts to unsuspecting users.
+    - ***Reflected Cross-Site Scription (XSS)*** - An attacker forces their victim to execute malicious JavaScript they did not intend to execute. This malicious JavaScript code is injected through a user-controlled input vector and later reflected in the vulnerable server's response.
+    - ***Stored Cross-Site Scripting (XSS)*** - Stored cross-site scripting (XSS) is a web security vulnerability where malicious scripts are injected into a website's permanent storage, like databases or comment sections, which are then served to users, causing the scripts to run in their browsers. This can lead to attackers stealing sensitive user data, session hijacking, or spreading malware through infected web pages.
+    - ***Blind Cross-Site Scripting (XSS)*** - Blind cross-site scripting (XSS) is a type of web vulnerability where malicious scripts are injected into a web application, but their impact isn't immediately visible to users. These scripts execute when another user, often an administrator or privileged user, interacts with the infected page, potentially leading to unauthorized actions or data compromise.
+    - ***Dangling Markup*** - A dangling markup refers to markup elements, such as HTML or XML tags, that exist in a web page's source code but do not result in any visible content on the page when rendered. These unused or hidden markup elements might lead to unintended consequences, including misinterpretation by web crawlers or search engines.  A dangling markup attack is a type of web vulnerability where an attacker injects malicious content into a web page's markup that remains invisible to users but can be parsed by search engines or other automated processes, leading to unintended content indexing or manipulation of search results. This can be exploited to deceive search engines or affect how a website appears in search results.
+    - ***Client-Side JavaScript Injection*** - An attacker forces their victim to execute malicious JavaScript they did not intend to execute without writing to the DOM. This malicious JavaScript code is often injected through "Sinks", or methods that capture user-controlled input and feed that data to client-side JavaScript during runtime, and delivered to a separate JavaScript method that evaluates the user-controlled string as JavaScript code.
+    - ***Client-Side Prototype Pollution (CSPP)*** - Client-side prototype pollution is a vulnerability where an attacker manipulates JavaScript objects' prototypes in a web application to inject malicious properties or behaviors, potentially leading to unauthorized data access or code execution. This occurs when a web application does not properly validate or sanitize user-supplied data that affects the prototype chain of JavaScript objects.
+    - ***DOM-Based Cross-Site Scription (XSS)*** - An attacker forces their victim to execute malicious JavaScript they did not intend to execute. This malicious JavaScript code is often injected through "Sinks", or methods that capture user-controlled input and feed that data to client-side JavaScript during runtime, and delivered to a separate JavaScript method that allows for malicious execution.
+    - ***DOM-Based Open Redirect*** - A DOM-based open redirect is a web security vulnerability that arises when a web application's client-side JavaScript code modifies the Document Object Model (DOM) to redirect users to an external, untrusted URL supplied by an attacker. By manipulating the DOM, attackers can trick users into visiting malicious websites or performing actions they didn't intend, potentially leading to phishing attacks or other unauthorized activities.
+    - ***Client-Side Template Injection (CSTI)*** - Client-side template injection is a security vulnerability where untrusted user input is injected into templates processed on the client side, often resulting in the execution of unintended template code, manipulation of the user interface, and potential data exposure. This occurs when the application fails to properly validate or sanitize user input before using it in template rendering, allowing attackers to control template expressions and their outcomes.
+    - ***PostMessage Vulnerabilities*** - `postMessage()` is a method in JavaScript that enables communication between different windows or frames within a web application, even if they are from different origins (domains). It allows cross-origin communication by sending messages along with target origin information, facilitating data sharing and coordination between different parts of a web application.
+    - ***Client-Side Denial of Service (DoS) / Breaking The DOM*** - Modern web applications feature intricate front-end designs, involving distributed systems with asynchronous communication, which can inadvertently trigger unforeseen interactions exploited by attackers for malicious purposes. Attackers can exploit weaknesses in a web application's client-side code to disrupt its normal operation and gain unauthorized access, potentially causing the application to break or malfunction.
+- **Weaponizing HTML-Based Client-Side Injections**
     - Compensating Controls:
         - **Client-Side Validation** (*PREVENTS ATTACK*) - No effect on security but can show you what the developers are concered about.
         - **Server-Side Validation** (*PREVENTS ATTACK*) - Ensure user-controlled input is the expected *type* and *size* you expect, sanitize for malicious characters.
@@ -132,19 +156,17 @@ For each of our injections, we now have a good idea about what mechanism we are 
         - **Output Encoding** (*PREVENTS ATTACK*) - Encodes user-controlled input as it is output to the DOM, preventing malicious code from executing
         - **Cookie Flags** (*MITIGATES IMPACT*) - Directives that tell the browser how a cookie can be handled and where it can be sent.
         - **Content Security Policy (CSP)** (*MITIGATES IMPACT*) - Directives that tell the browser where and how recourses can be loaded, scripts can execute, connections can be established, and much more.
-    - Showing Impact:
+    - **Showing Impact**
         - Steal victim's cookie
         - Force victim to make an HTTP request
         - Steal DOM of restricted pages
-- **Output**:
-    - Application Behaves Unexpectedly
-    - That Behavior Has a Negative Impact on Sensitive Customer Data
-    - Explain Impact:
-        - 
 
 ## Server-Side Injections
-- *GOAL: Attacker's user-controlled input forces a server-side method to execute in a way the developers did not intend*
-- **Input**: Single Attack Vector w/ Possible Injection
+
+*GOAL: Attacker's user-controlled input forces a server-side method to execute in a way the developers did not intend*
+
+### Basic Hunting Methodology
+
 - Fuzzing For Server-Side Injections
     - Basic Methodology
         - Break the Application
@@ -162,48 +184,48 @@ For each of our injections, we now have a good idea about what mechanism we are 
         - Send unexpected characters (Ex: All possible ASCII characters in Unicode, Hex, and Double Hex)
         - Backslash Powered Scanner
     - Vulnerability Examples by Language
-        - Command Injection
+        - [Command Injection](https://book.hacktricks.xyz/pentesting-web/command-injection)
             - Node: `child_process.execSync()`
             - PHP: `exec()` OR `system()`
             - Python: `subprocess.run()`
             - Java: `Runtime.getRuntime().exec()`
-        - Code Injection - *Eval is Evil*
+        - [Code Injection](https://owasp.org/www-community/attacks/Code_Injection) - *Eval is Evil*
             - Node: `eval()`
             - PHP: `eval()`
             - Python: `eval()`
             - Java: `ScriptEngineManager manager = new ScriptEngineManager(); ScriptEngine engine = manager.getEngineByName("js");  Object result = engine.eval();`
-        - Server-Side Request Forgery (SSRF)
+        - [Server-Side Request Forgery (SSRF)](https://book.hacktricks.xyz/pentesting-web/ssrf-server-side-request-forgery)
             - Node: `http.request()` OR `axios.get()` OR `const fetch = require('node-fetch'); fetch()`
             - PHP: [cURL Extension](https://www.php.net/manual/en/book.curl.php)
             - Python: `requests.get()`
             - Java: `URL url = new URL(USER_CONTROLLED_INPUT); HttpURLConnection con = (HttpURLConnection) url.openConnection(); con.setRequestMethod("GET");`
-        - Server-Side Template Injection (SSTI)
+        - [Server-Side Template Injection (SSTI)](https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection)
             - [Node](https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection#jade-nodejs): `var html = jade.render('USER_CONTROLLED_INPUT', merge(options, locals));`
             - [PHP](https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection#twig-php): `$output = $twig > render (USER_CONTROLLED_INPUT)`
             - [Python](https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection#jinja2-python): `template.render(USER_CONTROLLED_INPUT)`
             - [Java](https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection#spring-framework-java): [Code Examples](https://www.baeldung.com/spring-template-engines)
-        - Server-Side Prototype Pollution (SSPP)
-            - Node:
-        - Insecure Deserialization
-        - File Inclusion
-        - XML External Entity (XXE)
-- **Output**:
-    - Application Behaves Unexpectedly
-    - That Behavior Has a Negative Impact on Sensitive Customer Data
-    - Explain Impact:
-        - 
+        - [Server-Side Prototype Pollution (SSPP)](https://portswigger.net/web-security/prototype-pollution/server-side)
+            - Node: `const merge = (target, source) => { for (const key of Object.keys(source)) {if (source[key] instanceof Object) Object.assign(source[key], merge(target[key], source[key])) } Object.assign(target || {}, source) return target }`
+        - [Insecure Deserialization](https://book.hacktricks.xyz/pentesting-web/deserialization)
+            - PHP: `__unserialize`, `__sleep`, `__wakeup`, `__destruct`, `__toString`
+            - Python: `pickle.dumps(SerializedObject()))`
+            - Node: `var serialize = require('node-serialize'); var payload_serialized = serialize.serialize(serializedObject);`
+            - Java: `java.io.ObjectInputStream`, `readObject`, `readUnshare`
+        - [File Inclusion](https://book.hacktricks.xyz/pentesting-web/file-inclusion)
+            - PHP: `fopen($filename, 'r')`
+            - Python: `open("filename.txt", "r")`
+            - Node: `constant fs = require('node:fs'); fs.readFileSync('filename.txt', 'utf8');`
+            - Java: `File myObj = new File("filename.txt");`
 
 ## Database Injections
+
 - *GOAL: Attacker's user-controlled input forces the application to make a database query the developers did not intend*
-- **Input**: Single Attack Vector w/ Possible Injection
-- SQL Injection
-    - MySQL
-    - MSSQL
-    - PostGRES
-    - 
-- NoSQL Injection
-- **Output**:
-    - Application Behaves Unexpectedly
-    - That Behavior Has a Negative Impact on Sensitive Customer Data
-    - Explain Impact:
-        - 
+
+- [**SQL Injection**](https://portswigger.net/web-security/sql-injection)
+    - [SQLMap](https://github.com/sqlmapproject/sqlmap)
+    - [Hacktricks](https://book.hacktricks.xyz/pentesting-web/sql-injection)
+    - [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/SQL%20Injection)
+- [**NoSQL Injection**](https://portswigger.net/web-security/nosql-injection)
+    - [NoSQLMap](https://github.com/codingo/NoSQLMap)
+    - [Hacktricks](https://book.hacktricks.xyz/pentesting-web/nosql-injection)
+    - [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection)
