@@ -1,12 +1,8 @@
-# defcon32-workshop
+# DEFCON 32 Bug Bounty Village Workshop Resources
 
 <div align="center">
   <a href="https://youtu.be/PqBtg-CMSWo"><img src="static/workshop.png" width="600px" alt="Youtube Thumbnail"></a>
 </div>
-
-Very much a work in progress :)
-
-I hope to see you there!!  
 
 Workshop starts at 4:30 PM on Friday at the [Bug Bounty Village](https://www.bugbountydefcon.com/)
 
