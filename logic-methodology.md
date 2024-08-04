@@ -256,5 +256,5 @@ client_id=12345&client_secret=SECRET&redirect_uri=https://client-app.com/callbac
 - Can be combined with normal OAuth grant Types
     EX: response_type=id_token token || response_type=id_token code
 
-Step 1: Check for dynamic registration (is some form of authentication required, like a Bearer token?)
-Step 2: Craft a malicious registration payload for SSRF
+- Step 1: Check for dynamic registration (is some form of authentication required, like a Bearer token?)
+- Step 2: Craft a malicious registration payload for SSRF
