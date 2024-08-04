@@ -125,6 +125,10 @@ At this point, you should be very familiar with the application, have a ton of n
 
 *SUMMARY: [Insecure Direct Object References (IDORs)](https://portswigger.net/web-security/access-control/idor) occur when an application fails to validate that a client is authorized to access the data contained in a specific object.  Every mechanism in a web application performs a CRUD operation on data stored in the application's database.  To accomplish this, the application must find some way to identify the object that is being read/modified/deleted (IDORs don't typically come into play on CREATE mechanisms).  A method in the server-side code is designed to take a unique identifier and query the database for the data set represented by that unique identifier.  How this works exactly depends on the technology stack, but from a security standpoint they all do the same thing. The vulnerability occurs when the application fails to validate that the user submitting the unique identifier is authorized to access the larger data set.  
 
+<div>
+  <a href="https://youtu.be/BfbS8uRjeAg"><img src="static/idors-acvs-part1.png" width="300px" alt="Youtube Thumbnail"></a>
+</div>
+
 [YouTube Video - [Part I] Bug Bounty Hunting for IDORs and Access Control Violations](https://youtu.be/BfbS8uRjeAg)
 
 ### Basic IDOR Hunting Steps
@@ -136,6 +140,10 @@ At this point, you should be very familiar with the application, have a ton of n
     - *From a user-controlled parameter?* - Jackpot, this is the best case scenario for IDORs.
 3. Find and document the unique identifier of another object of the same type you should not have access to.
 4. Attempt to access the other object to test whether the application is verifying your authorization to access that data.
+
+<div>
+  <a href="https://youtu.be/4h42AFrpyK0"><img src="static/idor.png" width="300px" alt="Youtube Thumbnail"></a>
+</div>
 
 [YouTube Video - Ask Yourself These Four Questions When Bug Bounty Hunting for IDORs](https://youtu.be/4h42AFrpyK0)
 

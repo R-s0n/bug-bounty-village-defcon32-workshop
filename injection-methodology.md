@@ -10,7 +10,15 @@
     - Application Behaves in a Way it Was Not Intended To Behave
 
 ## Client-Side Injections
-- *GOAL: Attacker's user-controlled input forces the DOM to load in a way that the developers did not intend'*
+
+*GOAL: Attacker's user-controlled input forces the DOM to load in a way that the developers did not intend'*
+
+<div>
+  <a href="https://youtu.be/cnL7CB-Gak0"><img src="static/client-side-injections.png" width="300px" alt="Youtube Thumbnail"></a>
+</div>
+
+[YouTube Video - Bug Bounty Hunting for Client-Side Injection Vulnerabilities | Part I](https://youtu.be/cnL7CB-Gak0)
+
 - **Input**: Single Attack Vector w/ Possible Injection
 - Injecting HTML
     1. Find Reflected User-Controlled Input
